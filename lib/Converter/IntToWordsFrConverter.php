@@ -10,7 +10,7 @@ use RuntimeException;
  *
  * @author Michael VEROUX
  */
-class IntToWordsFrConverter
+class IntToWordsFrConverter implements IntToWordsFrConverterInterface
 {
     const UNITS = [
         1 => 'un',
@@ -45,6 +45,11 @@ class IntToWordsFrConverter
         90 => "quatre-vingt-dix",
     ];
 
+    public function convert(int $int): string
+    {
+        return $this->internalConvert($int);
+    }
+
     /**
      * @param int  $int
      * @param bool $isPluriable
@@ -53,7 +58,7 @@ class IntToWordsFrConverter
      *
      * @author Michaël VEROUX
      */
-    public function convert(int $int, bool $isPluriable = true): string
+    protected function internalConvert(int $int, bool $isPluriable = true): string
     {
         if (0 === $int) {
             return 'zéro';
@@ -262,10 +267,10 @@ class IntToWordsFrConverter
 
         $thousands = (int)substr((string)$int, 0, -3);
         if ($thousands * 1000 === $int) {
-            return sprintf('%s mille', $this->convert($thousands, false));
+            return sprintf('%s mille', $this->internalConvert($thousands, false));
         }
 
-        return sprintf('%s mille %s', $this->convert($thousands, false), $this->convert($int - ($thousands * 1000)));
+        return sprintf('%s mille %s', $this->internalConvert($thousands, false), $this->internalConvert($int - ($thousands * 1000)));
     }
 
     /**
@@ -292,7 +297,7 @@ class IntToWordsFrConverter
                 $pattern .= 's';
             }
 
-            return sprintf($pattern, $this->convert($millions, false));
+            return sprintf($pattern, $this->internalConvert($millions, false));
         }
 
         $pattern = '%s million %s';
@@ -300,7 +305,7 @@ class IntToWordsFrConverter
             $pattern = '%s millions %s';
         }
 
-        return sprintf($pattern, $this->convert($millions, false), $this->convert($int - ($millions * 1000000)));
+        return sprintf($pattern, $this->internalConvert($millions, false), $this->internalConvert($int - ($millions * 1000000)));
     }
 
     /**
@@ -327,7 +332,7 @@ class IntToWordsFrConverter
                 $pattern .= 's';
             }
 
-            return sprintf($pattern, $this->convert($milliards, false));
+            return sprintf($pattern, $this->internalConvert($milliards, false));
         }
 
         $pattern = '%s milliard %s';
@@ -335,6 +340,6 @@ class IntToWordsFrConverter
             $pattern = '%s milliards %s';
         }
 
-        return sprintf($pattern, $this->convert($milliards, false), $this->convert($int - ($milliards * 1000000000)));
+        return sprintf($pattern, $this->internalConvert($milliards, false), $this->internalConvert($int - ($milliards * 1000000000)));
     }
 }
