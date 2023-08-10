@@ -4,7 +4,7 @@ Converts numbers into words in French (FR_fr) up to 999,999,999,999,999,999.
 
 ## Build Status
 
-[![Build Status](https://app.travis-ci.com/phpmike/MvNumberWordsFrConverter.svg?branch=master)](https://app.travis-ci.com/phpmike/MvNumberWordsFrConverter)
+[![Build Status](https://app.travis-ci.com/phpmike/MvNumberWordsFrConverter.svg?branch=1.0)](https://app.travis-ci.com/phpmike/MvNumberWordsFrConverter)
 
 
 ## Installation
