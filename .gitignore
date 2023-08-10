@@ -1,6 +1,5 @@
 /Tests/
 /build/
-/.travis.yml
 /build.xml
 /phpunit.xml.dist
 
