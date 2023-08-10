@@ -30,12 +30,11 @@ echo $result; // "douze mille trois cent quarante-cinq"
 
 ## Methods
 
-### `convert(int $int, bool $isPluriable = true): string`
+### `convert(int $int): string`
 
 Converts an integer into words.
 
 - `$int`: The integer to convert into words.
-- `$isPluriable`: (Optional) If `true`, allows handling plural forms (e.g., "deux millions" vs "deux million"). Defaults to `true`.
 
 ## Contributing
 
