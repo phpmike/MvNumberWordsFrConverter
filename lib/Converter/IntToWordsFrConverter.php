@@ -95,7 +95,7 @@ class IntToWordsFrConverter implements IntToWordsFrConverterInterface
             throw new RuntimeException('Int greater than 9!');
         }
 
-        $word = self::UNITS[$int];
+        $word = static::UNITS[$int];
 
         return $word;
     }
@@ -119,17 +119,17 @@ class IntToWordsFrConverter implements IntToWordsFrConverterInterface
 
         // 80 particularity
         if (80 === $int && $isPluriable) {
-            return self::TENS[$int].'s';
+            return static::TENS[$int].'s';
         }
-        if (isset(self::TENS[$int])) {
-            return self::TENS[$int];
+        if (isset(static::TENS[$int])) {
+            return static::TENS[$int];
         }
-        if (isset(self::IRREGULAR_TENS[$int])) {
-            return self::IRREGULAR_TENS[$int];
+        if (isset(static::IRREGULAR_TENS[$int])) {
+            return static::IRREGULAR_TENS[$int];
         }
         // 81 particularity
         if (81 === $int) {
-            $word = sprintf('%s-%s', self::TENS[80], self::UNITS[1]);
+            $word = sprintf('%s-%s', static::TENS[80], static::UNITS[1]);
 
             return $word;
         }
@@ -140,29 +140,42 @@ class IntToWordsFrConverter implements IntToWordsFrConverterInterface
 
         // 7 and 9 particularities
         if (7 === $ten || 9 === $ten) {
-            $tens = str_replace('-dix', '', self::TENS[$ten * 10]);
-
-            // First case
-            if (1 === $unit && 7 === $ten) {
-                $word = sprintf('%s et %s', $tens, self::IRREGULAR_TENS[11]);
-
-                return $word;
-            }
-
-            $word = sprintf('%s-%s', $tens, $this->tenConvert($unit + 10));
-
-            return $word;
+            return $this->tenSub7and9Convert($ten, $unit);
         }
 
         // Regular first case (not 7x or 9x)
         if (1 === $unit) {
-            $word = sprintf('%s et %s', self::TENS[$ten * 10], self::UNITS[$unit]);
+            $word = sprintf('%s et %s', static::TENS[$ten * 10], static::UNITS[$unit]);
 
             return $word;
         }
 
         // Regulars
-        $word = sprintf('%s-%s', self::TENS[$ten * 10], self::UNITS[$unit]);
+        $word = sprintf('%s-%s', static::TENS[$ten * 10], static::UNITS[$unit]);
+
+        return $word;
+    }
+
+    /**
+     * @param int $ten
+     * @param int $unit
+     *
+     * @return string
+     *
+     * @author Michaël VEROUX
+     */
+    protected function tenSub7and9Convert(int $ten, int $unit): string
+    {
+        $tens = str_replace('-dix', '', static::TENS[$ten * 10]);
+
+        // First case
+        if (1 === $unit && 7 === $ten) {
+            $word = sprintf('%s et %s', $tens, static::IRREGULAR_TENS[11]);
+
+            return $word;
+        }
+
+        $word = sprintf('%s-%s', $tens, $this->tenConvert($unit + 10));
 
         return $word;
     }

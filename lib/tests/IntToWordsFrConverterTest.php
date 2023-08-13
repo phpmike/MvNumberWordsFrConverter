@@ -19,6 +19,9 @@ class IntToWordsFrConverterTest extends TestCase
         $result = $converter->convert(20);
         $this->assertEquals('vingt', $result);
 
+        $result = $converter->convert(71);
+        $this->assertEquals('soixante et onze', $result);
+
         $result = $converter->convert(80);
         $this->assertEquals('quatre-vingts', $result);
 
@@ -27,6 +30,9 @@ class IntToWordsFrConverterTest extends TestCase
 
         $result = $converter->convert(81);
         $this->assertEquals('quatre-vingt-un', $result);
+
+        $result = $converter->convert(95);
+        $this->assertEquals('quatre-vingt-quinze', $result);
 
         $result = $converter->convert(51);
         $this->assertEquals('cinquante et un', $result);
