@@ -28,6 +28,22 @@ $result = $converter->convert(12345);
 echo $result; // "douze mille trois cent quarante-cinq"
 ```
 
+Other locales
+
+```php
+use Mv\NumberWordsFr\Converter\IntToWordsFrBeConverter;
+use Mv\NumberWordsFr\Converter\IntToWordsFrCaConverter;
+
+$converter = new IntToWordsFrBeConverter();
+$resultBe = $converter->convert(72);
+$converter = new IntToWordsFrCaConverter();
+$resultCa = $converter->convert(72);
+
+echo $resultBe; // "Septante-deux"
+echo $resultCa; // "Soixante-douze"
+```
+Exists with Fr, FrBe, FrCh, FrCa, FrLu, FrMa, FrTn
+
 ## Methods
 
 ### `convert(int $int): string`
@@ -44,7 +60,7 @@ Any contributions, suggestions, or bug reports are welcome! Here's how you can c
 2. Create a branch for your changes: `git checkout -b feature/my-feature`.
 3. Make your changes and commit: `git commit -am 'Added my feature'`.
 4. Push to the branch: `git push origin feature/my-feature`.
-5. Create a pull request to the main branch of the repository.
+5. Create a pull request to the concerned branch of the repository.
 
 ## License
 
