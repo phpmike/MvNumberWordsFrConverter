@@ -4,7 +4,11 @@ Converts numbers into words in French (FR_fr) up to 999,999,999,999,999,999.
 
 ## Build Status
 
+[![License](http://poser.pugx.org/mv/number-words-fr/license)](https://packagist.org/packages/mv/number-words-fr)
 [![Build Status](https://app.travis-ci.com/phpmike/MvNumberWordsFrConverter.svg?branch=1.0)](https://app.travis-ci.com/phpmike/MvNumberWordsFrConverter)
+[![Latest Stable Version](http://poser.pugx.org/mv/number-words-fr/v)](https://packagist.org/packages/mv/number-words-fr)
+[![PHP Version Require](http://poser.pugx.org/mv/number-words-fr/require/php)](https://packagist.org/packages/mv/number-words-fr)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c05d1aa60a834a64a9c5/test_coverage)](https://codeclimate.com/github/phpmike/MvNumberWordsFrConverter/test_coverage)
 
 
 ## Installation
