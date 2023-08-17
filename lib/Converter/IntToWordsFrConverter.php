@@ -110,12 +110,7 @@ class IntToWordsFrConverter implements IntToWordsFrConverterInterface
      */
     protected function tenConvert(int $int, bool $isPluriable = false): string
     {
-        if (10 > $int) {
-            throw new RuntimeException('Int lower than 10!');
-        }
-        if (99 < $int) {
-            throw new RuntimeException('Int greater than 99!');
-        }
+        $this->bornedTo($int, '10', '99');
 
         // 80 particularity
         if (80 === $int && $isPluriable) {
@@ -190,12 +185,7 @@ class IntToWordsFrConverter implements IntToWordsFrConverterInterface
      */
     protected function hundredConvert(int $int, bool $isPluriable = false): string
     {
-        if (100 > $int) {
-            throw new RuntimeException('Int lower than 100!');
-        }
-        if (999 < $int) {
-            throw new RuntimeException('Int greater than 999!');
-        }
+        $this->bornedTo($int, '100', '999');
 
         // 100
         if (100 === $int) {
@@ -249,12 +239,7 @@ class IntToWordsFrConverter implements IntToWordsFrConverterInterface
      */
     protected function thousandConvert(int $int, bool $isPluriable): string
     {
-        if (1000 > $int) {
-            throw new RuntimeException('Int lower than 1 000!');
-        }
-        if (999999 < $int) {
-            throw new RuntimeException('Int greater than 999999!');
-        }
+        $this->bornedTo($int, '1000', '999999');
 
         // 1000
         if (1000 === $int) {
@@ -296,12 +281,7 @@ class IntToWordsFrConverter implements IntToWordsFrConverterInterface
      */
     protected function millionConvert(int $int, bool $isPluriable): string
     {
-        if (1000000 > $int) {
-            throw new RuntimeException('Int lower than 1 000 000!');
-        }
-        if (999999999 < $int) {
-            throw new RuntimeException('Int greater than 999999999!');
-        }
+        $this->bornedTo($int, '1000000', '999999999');
 
         $millions = (int)substr((string)$int, 0, -6);
         if ($millions * 1000000 === $int) {
@@ -331,12 +311,7 @@ class IntToWordsFrConverter implements IntToWordsFrConverterInterface
      */
     protected function milliardConvert(int $int, bool $isPluriable): string
     {
-        if (1000000000 > $int) {
-            throw new RuntimeException('Int lower than 1 000 000 000!');
-        }
-        if (999999999999999999 < $int) {
-            throw new RuntimeException('Int greater than 999 999 999 999 999 999!');
-        }
+        $this->bornedTo($int, '1000000000', '999999999999999999');
 
         $milliards = (int)substr((string)$int, 0, -9);
         if ($milliards * 1000000000 === $int) {
@@ -354,5 +329,25 @@ class IntToWordsFrConverter implements IntToWordsFrConverterInterface
         }
 
         return sprintf($pattern, $this->internalConvert($milliards, false), $this->internalConvert($int - ($milliards * 1000000000)));
+    }
+
+
+    /**
+     * @param int  $int
+     * @param int  $min
+     * @param int  $max
+     *
+     * @return void
+     *
+     * @author Michaël VEROUX
+     */
+    protected function bornedTo(int $int, int $min, int $max)
+    {
+        if ($min > $int) {
+            throw new RuntimeException(sprintf('Int lower than %s!', $min));
+        }
+        if ($max < $int) {
+            throw new RuntimeException(sprintf('Int greater than %s!', $max));
+        }
     }
 }
