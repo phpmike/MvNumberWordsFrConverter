@@ -1,5 +1,5 @@
 exclude_paths:
-  - "tests/"
+  - "lib/tests/"
 ratings:
   paths:
     - "lib/"
